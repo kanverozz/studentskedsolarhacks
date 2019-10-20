@@ -1,0 +1,221 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    ThirdWindow:
+    SaveWindow:
+    StudyWindow:
+    ViewWindow:
+<MainWindow>
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+    name:'main'
+    FloatLayout:
+        Image:
+            source: (r"C:\Users\Magesh Vaidheeswaran\skedlogo.png")
+            pos_hint:{'x':0.25,'y':0.5}
+            allow_stretch: True
+            size_hint:.5,.2
+        Button:
+            text:"Let's Go!"
+            #font_size:40
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.3}
+            on_release:
+                app.root.current='schedule'
+                root.manager.transition.direction="up"
+        #Label:
+        #    id: Welcome
+        #    text:"Welcome to StudentSked"
+        #    pos_hint:{'x':0,'y':0}
+        #    font_size:40
+        #    color:1,0,0,1
+
+<SecondWindow>
+    name:'schedule'
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    FloatLayout:
+        Button:
+            text:"Add Event"
+            #font_size:40
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.2}
+            on_release:
+                app.root.current='edit'
+        Button:
+            text:"Go Back Home"
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0}
+            on_release:
+                app.root.current='main'
+                root.manager.transition.direction="down"
+        Button:
+            text:"Study Plan"
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.4}
+            on_release:
+                app.root.current='study'
+                root.manager.transition.direction="down"
+        Button:
+            text:"View Schedule"
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.6}
+            on_release:
+                app.root.current='view'
+                root.manager.transition.direction="down"
+<ThirdWindow>
+    name:'edit'
+    duration:duration
+    time:time
+    event:event
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+    FloatLayout:
+        Button:
+            text:"Cancel"
+            background_color:1,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.5,'y':0}
+            background_color:205,0,0,1
+            on_release:
+                app.root.current='main'
+                root.manager.transition.direction="down"
+
+        Button:
+            text:"Add to Schedule"
+            background_color:1,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0,'y':0}
+            background_color:205,0,0,1
+            on_release:
+                root.add_to()
+                app.root.current='save'
+                root.manager.transition.direction="down"
+        TextInput:
+            id:time
+            size_hint:.33,.2
+            pos_hint:{'x':0,'y':0.5}
+            multinline:False
+        TextInput:
+            id:event
+            size_hint:.33,.2
+            pos_hint:{'x':0.33,'y':0.5}
+            multinline:False
+        TextInput:
+            id:duration
+            size_hint:.33,.2
+            pos_hint:{'x':0.66,'y':0.5}
+            multinline:False
+        Label:
+            text:"Time"
+            pos_hint:{'x':-.33,'y':0.3}
+            color:1,0,0,1
+        Label:
+            text:"Event Name"
+            pos_hint:{'x':0,'y':0.3}
+            color:1,0,0,1
+        Label:
+            text:"Duration"
+            pos_hint:{'x':0.33,'y':0.3}
+            color:1,0,0,1
+<SaveWindow>:
+    name:'save'
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    FloatLayout:
+        Label:
+            text:"Event Has Been Saved!"
+            pos_hint:{'x':0,'y':0.2}
+            color:1,0,0,1
+        Button:
+            text:"Go To Schedule"
+            #font_size:40
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.3}
+            on_release:
+                app.root.current='schedule'
+                root.manager.transition.direction="up"
+<StudyWindow>:
+    name:'study'
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    FloatLayout:
+        Label:
+            text:"How many days away is your test?"
+            pos_hint:{'x':0,'y':0.2}
+            color:1,0,0,1
+        TextInput:
+            id:duration
+            size_hint:.33,.2
+            pos_hint:{'x':0.35,'y':0.4}
+            multinline:False
+        Button:
+            text:"Submit"
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.16}
+            on_release:
+                app.root.current='schedule'
+                root.manager.transition.direction="up"
+<ViewWindow>:
+    name:'view'
+    sevent:sevent
+    sduration:sduration
+    stime:stime
+    canvas.before:
+        Color:
+            rgba:1,1,1,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    FloatLayout:
+        Label:
+            id:stime
+            text:""
+            pos_hint:{'x':0,'y':0}
+            color:1,0,0,1
+        Label:
+            id:sevent
+            text:""
+            pos_hint:{'x':0,'y':0.1}
+            color:1,0,0,1
+        Label:
+            id:sduration
+            text:""
+            pos_hint:{'x':0,'y':0.2}
+            color:1,0,0,1
+        Button:
+            text:"Show"
+            background_color:205,0,0,1
+            size_hint:.5,.2
+            pos_hint:{'x':0.25,'y':0.16}
+            on_release:
+                root.show()
